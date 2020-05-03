@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends AbstractPageBase{
+public class LoginPage extends AbstractPageBase {
 
     @FindBy(id = "prependedInput")
     private WebElement username;
@@ -54,5 +54,22 @@ public class LoginPage extends AbstractPageBase{
         password.sendKeys(ConfigurationReader.getProperty("password"), Keys.ENTER);
         BrowserUtilities.waitForPageToLoad(10);
         BrowserUtilities.wait(3);
+    }
+
+    public void login(String role) {
+        String userName = "";
+        if (role.equalsIgnoreCase("driver")) {
+            userName = "user15";
+        } else if (role.equalsIgnoreCase("sales manager")) {
+            userName = "salesmanager110";
+
+        } else if (role.equalsIgnoreCase("store manager")) {
+            userName = "storemanager85";
+
+        } else {
+            throw new RuntimeException("invalid role!");
+        }
+        System.out.println("Login as "+role);
+        login(userName, "UserUser123");
     }
 }
